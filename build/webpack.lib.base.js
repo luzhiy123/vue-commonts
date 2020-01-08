@@ -2,7 +2,14 @@ const VueLoaderPlugin = require("vue-loader/lib/plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
 module.exports = {
-    externals: ["vue", "element-ui", /^element-ui/],
+    externals: [
+        "vue",
+        "element-ui",
+        /^element-ui/,
+        "vuedraggable",
+        "throttle-debounce", 
+        /^throttle-debounce/
+    ],
     module: {
         rules: [
             {
@@ -11,7 +18,7 @@ module.exports = {
                 use: [
                     {
                         loader: "babel-loader"
-                    }	
+                    }
                 ]
             },
             {

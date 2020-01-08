@@ -4,9 +4,12 @@ import ElementUI, { install } from "element-ui";
 
 import Input from "../packages/input/index.js";
 import Autocomplete from "../packages/autocomplete/index.js";
+import CustomInvoice from "../packages/custom-invoice/index.js";
+
 const components = [
     Input,
     Autocomplete,
+    CustomInvoice,
 ];
 
 const hztlInstall = function(Vue) {
@@ -25,5 +28,6 @@ export default {
     ...ElementUI,
     install: hztlInstall,
     Input,
-    Autocomplete
+    Autocomplete,
+    CustomInvoice
 };
