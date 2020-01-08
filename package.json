@@ -1,0 +1,81 @@
+{
+  "name": "hztl-ui",
+  "version": "1.0.0",
+  "main": "lib/index.js",
+  "directories": {
+    "example": "examples",
+    "lib": "lib"
+  },
+  "scripts": {
+    "build:entry": "node build/bin/build-entry.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "webpack-dev-server --config ./build/webpack.dev.js --progress",
+    "start": "npm run dev",
+    "build:": "webpack --config ./build/webpack.prod.js --progress",
+    "lint": "eslint --fix --ext .js,.vue src",
+    "lint:commit": "eslint --ext .js,.vue src",
+    "lib:all": "npm run build:entry && webpack --config ./build/webpack.lib.prod.js",
+    "lib:disp": "webpack --config ./build/webpack.lib.disperse.js",
+    "build:lib": "npm run lib:all && npm run lib:disp"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@gitlab.hztl3.xyz:front/hztl-ui.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "peerDependencies": {
+    "element-ui": "2.8.2",
+    "vue": "^2.6.10",
+    "vuedraggable": "^2.23.2"
+  },
+  "files": [
+    "lib"
+  ],
+  "devDependencies": {
+    "@babel/core": "^7.7.5",
+    "@babel/plugin-syntax-dynamic-import": "^7.7.4",
+    "@babel/preset-env": "^7.7.5",
+    "@intervolga/optimize-cssnano-plugin": "^1.0.6",
+    "autoprefixer": "^9.7.3",
+    "babel-eslint": "^10.0.3",
+    "babel-loader": "^8.0.6",
+    "babel-plugin-import": "^1.13.0",
+    "clean-webpack-plugin": "^3.0.0",
+    "copy-webpack-plugin": "^5.1.0",
+    "css-loader": "^3.2.1",
+    "dart-sass": "^1.23.7",
+    "element-ui": "^2.13.0",
+    "eslint": "^6.8.0",
+    "eslint-config-standard": "^14.1.0",
+    "eslint-friendly-formatter": "^4.0.1",
+    "eslint-loader": "^3.0.3",
+    "eslint-plugin-import": "^2.19.1",
+    "eslint-plugin-node": "^11.0.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.1",
+    "eslint-plugin-vue": "^6.1.1",
+    "file-loader": "^5.0.2",
+    "html-webpack-plugin": "^3.2.0",
+    "husky": "^3.1.0",
+    "json-templater": "^1.2.0",
+    "mini-css-extract-plugin": "^0.8.0",
+    "postcss-loader": "^3.0.0",
+    "postcss-px-to-viewport": "^1.1.1",
+    "postcss-pxtorem": "^4.0.1",
+    "progress-bar-webpack-plugin": "^1.12.1",
+    "sass-loader": "^8.0.0",
+    "style-loader": "^1.0.1",
+    "uppercamelcase": "^3.0.0",
+    "url-loader": "^3.0.0",
+    "vue": "^2.6.11",
+    "vue-loader": "^15.7.2",
+    "vue-template-compiler": "^2.6.10",
+    "vuedraggable": "^2.23.2",
+    "webpack": "^4.41.2",
+    "webpack-bundle-analyzer": "^3.6.0",
+    "webpack-cli": "^3.3.10",
+    "webpack-dev-server": "^3.9.0",
+    "webpack-merge": "^4.2.2"
+  }
+}
