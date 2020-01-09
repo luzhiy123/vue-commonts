@@ -17,7 +17,7 @@ export default {
     },
     render() {
         return (
-            <div>
+            <div class="ht-invoice-edit-warp">
                 <invoice-header templateData={this.templateData.header} />
                 <invoice-body templateData={this.templateData.body} />
                 <invoice-header templateData={this.templateData.footer} />
@@ -26,3 +26,11 @@ export default {
     }
 };
 </script>
+<style lang="scss">
+
+.ht-invoice-edit-warp {
+    background-color: #000;
+    padding: 20px;
+}
+
+</style>

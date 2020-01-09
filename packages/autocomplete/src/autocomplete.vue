@@ -384,3 +384,14 @@ export default {
     }
 };
 </script>
+
+<style lang="scss">
+.ht-arrow-icon {
+    cursor: pointer;
+    transition: transform 0.3s;
+
+    &.is-reverse {
+        transform: rotate(180deg);
+    }
+}
+</style>
