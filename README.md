@@ -8,6 +8,7 @@ npm start
 
 ## 打包
     1、 命令
-    npm run build:lib
+    npm run build   编辑组件
+    npm start 启动 demo
     2、注意
     组件在 components.json引入，不要直接修改入口文件index.js
