@@ -45,7 +45,7 @@
             >
                 <slot name="suffix">
                     <i
-                        :class="['arrow-icon', 'el-input__icon', 'el-icon-arrow-down', {'is-reverse': activated}]"
+                        :class="['ht-arrow-icon', 'el-input__icon', 'el-icon-arrow-down', {'is-reverse': activated}]"
                         @click="handleClickSuffix"
                     />
                 </slot>
@@ -384,13 +384,3 @@ export default {
     }
 };
 </script>
-<style lang="scss" scoped>
-.arrow-icon {
-    cursor: pointer;
-    transition: transform 0.3s;
-
-    &.is-reverse {
-        transform: rotate(180deg);
-    }
-}
-</style>

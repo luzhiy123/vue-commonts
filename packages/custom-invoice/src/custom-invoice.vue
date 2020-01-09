@@ -1,13 +1,15 @@
 
 <script>
 
-import HeaderAlternative from "./header-alternative";
+import InvoiceAlternative from "./invoice-alternative";
+import InvoiceContent from "./invoice-content"
 
 export default {
     name: "HtCustomInvoice",
     componentName: "HtCustomInvoice",
     components: {
-        HeaderAlternative
+        InvoiceAlternative,
+        InvoiceContent
     },
 
     props: {
@@ -23,8 +25,15 @@ export default {
             type: Array,
             required: true
         },
-        invoiceData: {
-            type: JSON,
+        templateData: {
+            type: Object,
+            default() {
+                return {
+                    header: [],
+                    body: [],
+                    footer: []
+                }
+            }
         }
     },
 
@@ -33,7 +42,12 @@ export default {
         };
     },
     render() {
-        return (<div>asad</div>)
+        return (
+            <div>
+                <InvoiceAlternative headerFiles={this.headerFiles} bodyFiles={this.bodyFiles}  />
+                <InvoiceContent templateData={this.templateData} />
+            </div>
+        )
     }
 };
 </script>

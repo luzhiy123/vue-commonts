@@ -1,14 +1,8 @@
-<template>
-    <div>
-        body
-    </div>
-</template>
-
 <script>
 export default {
     
     props: {
-        data: {
+        templateData: {
             type: Array,
             required: true
         },
@@ -17,6 +11,13 @@ export default {
     data() {
         return {
         };
+    },
+    render() {
+        return (
+            <div>
+                body
+            </div>
+        )
     }
 }
 </script>
