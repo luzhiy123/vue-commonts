@@ -21,7 +21,10 @@ export default {
     data() {
         return {};
     },
-    methods: {},
+    mounted() {
+    },
+    methods: {
+    },
     render() {
         return (
             <div class="ht-invoice-alternative">
@@ -31,27 +34,14 @@ export default {
                 </div>
                 <div class="ht-invoice-header-alternative">
                     <div class="sub-title">页头页尾独立字段</div>
-                    <AlternativeFiles group={{ name: "header", pull: "clone", put: false }} list={this.headerFiles} />
+                    <AlternativeFiles group="header" list={this.headerFiles} />
                 </div>
                 <div>
                     <div class="sub-title">标题列数据</div>
-                    <AlternativeFiles group={{ name: "body", pull: "clone", put: false }} list={this.bodyFiles} />
+                    <AlternativeFiles group="body" list={this.bodyFiles} />
                 </div>
             </div>
         );
     }
 };
 </script>
-<style lang="scss">
-.ht-invoice-alternative {
-    .title {
-        margin-bottom: 20px;
-    }
-    .sub-title {
-        margin-bottom: 10px;
-    }
-}
-.ht-invoice-header-alternative {
-    margin-bottom: 20px;
-}
-</style>

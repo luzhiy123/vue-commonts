@@ -1,15 +1,13 @@
 const VueLoaderPlugin = require("vue-loader/lib/plugin");
-const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+const config = require("./config");
 
 module.exports = {
-    externals: [
-        "vue",
-        "element-ui",
-        /^element-ui/,
-        "vuedraggable",
-        "throttle-debounce", 
-        /^throttle-debounce/
-    ],
+    resolve: {
+        extensions: [".js", ".vue", ".json"],
+        alias: config.alias
+    },
+    externals: config.externals,
+    devtool: "source-map",
     module: {
         rules: [
             {
@@ -51,13 +49,6 @@ module.exports = {
         ]
     },
     plugins: [
-        new CleanWebpackPlugin(),
         new VueLoaderPlugin()
-    ],
-    resolve: {
-        alias: {
-            "vue$": "vue/dist/vue.runtime.esm.js",
-        },
-        extensions: ["*", ".js", ".vue"]
-    }
+    ]
 };

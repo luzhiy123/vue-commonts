@@ -1,9 +1,10 @@
 import Vue from "vue";
-import hztlUi from "hztl-ui";
+import HztlUi from "hztl-ui/lib/hztl-ui.common";
+import "hztl-ui/lib/theme-chalk/index.css";
 
 import App from "./App.vue";
 
-Vue.use(hztlUi)
+Vue.use(HztlUi)
 
 new Vue({
     render: h => h(App)

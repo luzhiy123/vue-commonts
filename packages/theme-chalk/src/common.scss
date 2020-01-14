@@ -1,0 +1,73 @@
+
+@import "./var";
+
+* {
+    box-sizing: border-box;
+    outline: none;
+}
+
+
+html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    background: $color-base-background;
+    color: $color-text-primary;
+    font-weight: 400;
+}
+
+ul {
+    list-style: none;
+}
+
+button {
+    font-weight: 200;
+}
+
+img {
+    max-width: 100%;
+}
+
+.text-ellipsis {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-right {
+    text-align: right;
+}
+.flex-container {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+
+    &.column-flex {
+        height: 100%;
+        flex-direction: column;
+        .auto-block {
+            height: 1px; 
+        }
+    }
+
+    .auto-block {
+        flex: auto; 
+    }
+}
+
+.full-height {
+    height: 100%;
+}
+
+.full-width {
+    width: 100%;
+}
+
+.link {
+    cursor: pointer;
+    color: $color-primary;
+}

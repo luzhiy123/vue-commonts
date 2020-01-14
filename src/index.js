@@ -5,14 +5,15 @@ import ElementUI, { install } from "element-ui";
 import Input from "../packages/input/index.js";
 import Autocomplete from "../packages/autocomplete/index.js";
 import CustomInvoice from "../packages/custom-invoice/index.js";
+import ResizeBox from "../packages/resize-box/index.js";
 
 import "element-ui/lib/theme-chalk/index.css";
-import "../packages/theme-chalk"
 
 const components = [
     Input,
     Autocomplete,
     CustomInvoice,
+    ResizeBox,
 ];
 
 const hztlInstall = function(Vue) {
@@ -32,5 +33,6 @@ export default {
     install: hztlInstall,
     Input,
     Autocomplete,
-    CustomInvoice
+    CustomInvoice,
+    ResizeBox
 };

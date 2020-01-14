@@ -1,11 +1,16 @@
 const webpack = require("webpack");
 const webpackCommonConfig = require("./webpack.config.js");
 const merge = require("webpack-merge");
+const config = require("./config");
 
 module.exports = merge(webpackCommonConfig, {
     // 指定模式，这儿有none production development三个参数可选
     // 具体作用请查阅官方文档
     mode: "development",
+    resolve: {
+        extensions: [".js", ".vue", ".json"],
+        alias: config.alias
+    },
     module: {
         rules: [
             {
@@ -27,15 +32,6 @@ module.exports = merge(webpackCommonConfig, {
                         loader: "postcss-loader"
                     }
                 ]
-            },
-            {
-                enforce: "pre",
-                test: /\.(js|vue)$/,
-                loader: "eslint-loader",
-                exclude: /node_modules/,
-                options: {
-                    formatter: require("eslint-friendly-formatter")
-                }
             }
         ]
     },

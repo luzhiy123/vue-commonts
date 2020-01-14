@@ -3,7 +3,7 @@
         v-clickoutside="close"
         :aria-expanded="suggestionVisible"
         :aria-owns="id"
-        class="el-autocomplete"
+        class="el-autocomplete ht-autocomplete"
         aria-haspopup="listbox"
         role="combobox"
     >
@@ -22,26 +22,26 @@
             @keydown.native.esc="activated = false"
         >
             <template
-                v-if="$slots.prepend"
                 slot="prepend"
+                v-if="$slots.prepend"
             >
                 <slot name="prepend" />
             </template>
             <template
-                v-if="$slots.append"
                 slot="append"
+                v-if="$slots.append"
             >
                 <slot name="append" />
             </template>
             <template
-                v-if="$slots.prefix"
                 slot="prefix"
+                v-if="$slots.prefix"
             >
                 <slot name="prefix" />
             </template>
             <template
-                v-if="showSuffix"
                 slot="suffix"
+                v-if="showSuffix"
             >
                 <slot name="suffix">
                     <i
@@ -52,8 +52,8 @@
             </template>
         </ht-input>
         <ht-autocomplete-suggestions
-            :id="id"
             ref="suggestions"
+            :id="id"
             :class="[popperClass ? popperClass : '']"
             :popper-options="popperOptions"
             :append-to-body="popperAppendToBody"
@@ -66,8 +66,8 @@
                 :key="index"
                 :class="{'highlighted': highlightedIndex === index}"
                 :aria-selected="highlightedIndex === index"
-                role="option"
                 @click="select(item)"
+                role="option"
             >
                 <slot :item="item">
                     {{ item[valueKey] }}
@@ -85,7 +85,7 @@ import { generateId } from "element-ui/lib/utils/util";
 import Focus from "element-ui/lib/mixins/focus";
 
 import HtAutocompleteSuggestions from "./autocomplete-suggestions";
-import HtInput from "../../input";
+import HtInput from "hztl-ui/packages/input";
 
 export default {
     name: "HtAutocomplete",
@@ -385,13 +385,3 @@ export default {
 };
 </script>
 
-<style lang="scss">
-.ht-arrow-icon {
-    cursor: pointer;
-    transition: transform 0.3s;
-
-    &.is-reverse {
-        transform: rotate(180deg);
-    }
-}
-</style>

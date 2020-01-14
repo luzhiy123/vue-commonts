@@ -1,6 +1,7 @@
 {
-    "input": "./packages/autocomplete/index.js",
+    "input": "./packages/input/index.js",
     "autocomplete": "./packages/autocomplete/index.js",
-    "custom-invoice":  "./packages/custom-invoice/index.js"
+    "custom-invoice":  "./packages/custom-invoice/index.js",
+    "resize-box": "./packages/resize-box/index.js"
 }
   

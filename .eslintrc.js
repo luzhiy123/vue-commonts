@@ -20,7 +20,7 @@ module.exports = {
         "vue/require-default-prop": "off",
         "quotes": [1, "double"],
 		"no-console": "off",
-		"no-debugger": "error"
+		"no-debugger": "warn"
 	},
 	parserOptions: {
 		parser: 'babel-eslint'

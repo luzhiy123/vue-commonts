@@ -15,7 +15,6 @@ import ElementUI, { install } from "element-ui";
 {{include}}
 
 import "element-ui/lib/theme-chalk/index.css";
-import "../packages/theme-chalk"
 
 const components = [
 {{install}},

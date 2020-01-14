@@ -20,25 +20,19 @@ export default {
                     on={this.$listeners}
                     list={this.list}
                 >
-                    {this.list.map(file => (
-                        <div class="list-group-item">
-                            <span>{file.name}：</span>
-                            <span>[{file.disvalue}]</span>
-                        </div>
-                    ))}
+                    {
+                        this.$scopedSlots.default ? this.$scopedSlots.default(this.list) :this.list.map(file => (
+                            <div class="list-group-item">
+                                <div class="file-item file-name text-ellipsis">{file.name}：</div>
+                                <div class="file-item file-value text-ellipsis">
+                                [{file.disvalue}]
+                                </div>
+                            </div>
+                        ))
+                    }
                 </Draggable>
             </div>
         );
     }
 };
 </script>
-<style lang="scss">
-@import "../../theme-chalk/src/var";
-
-.ht-alternative-files {
-    .list-group {
-        min-height: 20px;
-    }
-}
-
-</style>

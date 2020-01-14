@@ -1,0 +1,163 @@
+@import "./var";
+
+.ht-custom-invoice {
+    padding: 20px;
+    width: 1200px !important;
+    height: 100%;
+    margin: auto;
+
+    .invoice-warp-content {
+        width: 900px;
+    }
+
+    .button-group {
+        text-align: right;
+
+        .link {
+            margin-left: 10px;
+        }
+    }
+
+    .ht-invoice-alternative {
+        padding-right: 20px;
+
+        .title {
+            margin-bottom: 20px;
+        }
+
+        .sub-title {
+            margin-bottom: 10px;
+        }
+    }
+
+    .ht-invoice-alternative {
+        margin-bottom: 20px;
+
+        .list-group-item {
+            width: 100% !important;
+        }
+    }
+
+    .ht-alternative-files {
+        font-size: 12px;
+
+        .list-group {
+            min-height: 20px;
+        }
+
+        .list-group-item {
+            cursor: move;
+
+            &[draggable=true] {
+                background: rgba($color-bg-primary, 0.3);
+            }
+        }
+
+        .file-value {
+            color: $color-primary;
+        }
+
+        .file-item {
+            display: inline-block;
+        }
+    }
+
+    .ht-invoice-edit-body {
+        margin: 5px 0;
+        height: 60px;
+
+        .list-group {
+            display: flex;
+
+            .no-data {
+                height: 57px;
+                line-height: 57px;
+                flex: auto;
+                text-align: center;
+                border: 1px dashed $border-color-light;
+            }
+
+            .list-group-item {
+                border: solid $border-color-light;
+                border-width: 1px 0 1px 0;
+                min-width: 40px;
+                flex: none;
+            }
+
+            :first-child.list-group-item {
+                border-left-width: 1px;
+            }
+
+            .file-item {
+                display: block;
+                text-align: center;
+                padding: 5px;
+            }
+
+            .file-name {
+                border-bottom: 1px solid $border-color-light;
+            }
+        }
+    }
+
+
+    .ht-invoice-edit-header {
+        background-color: $color-bg-grey;
+        min-height: 30px;
+
+        .no-data {
+            flex: auto;
+            height: 28px;
+            line-height: 28px;
+            text-align: center;
+            border: 1px dashed $border-color-light;
+        }
+
+        .list-group {
+            display: flex;
+            flex-wrap: wrap;
+
+            .list-group-item {
+                border: 1px dashed $border-color-light;
+                margin-bottom: 5px;
+                height: 24px;
+                line-height: 24px;
+
+                &.item-flex-1 {
+                    width: 25%;
+                }
+
+                &.item-flex-2 {
+                    width: 50%;
+                }
+
+                &.item-flex-3 {
+                    width: 75%;
+                }
+
+                &.item-flex-4 {
+                    width: 100%;
+                }
+            }
+        }
+    }
+
+
+    .ht-invoice-edit-warp {
+        background-color: #000;
+        width: 900px;
+        padding: 20px;
+
+        .ht-invoice-edit-box {
+            background-color: $color-bg-grey;
+            padding: 10px;
+            height: 100%;
+        }
+
+        .ht-invoice-edit-content {
+            border: 2px dashed $border-color-light;
+            height: 100%;
+            padding: 20px;
+        }
+    }
+}

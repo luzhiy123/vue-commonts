@@ -1,3 +1,14 @@
 {
-  "presets": ["@vue/babel-preset-jsx"]
+    "presets": [
+        "@vue/babel-preset-jsx"
+    ],
+    "env": {
+        "utils": {
+            "presets": [
+                [
+                    "@babel/preset-env"
+                ]
+            ]
+        }
+    }
 }

@@ -1,0 +1,21 @@
+@import "./var";
+
+.ht-resize-box {
+    overflow: hidden;
+    height: 100%;
+    width: 100%;
+    position: relative;
+    border: 1px solid $border-color-light;
+    .right-resize-slider {
+        position: absolute;
+        top: 0;
+        right: 0;
+        height: 100%;
+        width: 1px;
+        background: $border-color-light;
+        cursor: col-resize;
+        &:hover {
+            width: 10px;
+        }
+    }
+}

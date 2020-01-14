@@ -1,8 +1,3 @@
-<template>
-    <div class="test">
-        <edit-invoice />
-    </div>
-</template>
 <script>
 
 import EditInvoice from "./components/edit-invoice";
@@ -13,11 +8,16 @@ export default {
     },
     data() {
         return {
+            aaa: console.log,
             test: "123"
         };
+    },
+    methods: {
+        log() {
+        }
+    },
+    render() {
+        return (<edit-invoice />)
     }
 };
 </script>
-
-<style lang="scss">
-</style>
