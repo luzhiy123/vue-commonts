@@ -1,0 +1,1 @@
+export const PRINGT_COPY_RIGHT = "思锐软件 （010）60219478/60219479"

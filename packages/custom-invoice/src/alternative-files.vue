@@ -10,14 +10,22 @@ export default {
             required: true
         }
     },
-    methods: {},
+    mounted() {
+        
+    },
+    methods: {
+        handleDraggableEnd(...a) {
+            console.log(a);
+        }
+    },
     render() {
+        const listeners = {...this.listeners, end: this.handleDraggableEnd }
         return (
             <div class="ht-alternative-files">
                 <Draggable
                     class="list-group"
                     attrs={this.$attrs}
-                    on={this.$listeners}
+                    on={listeners}
                     list={this.list}
                 >
                     {
