@@ -1,6 +1,6 @@
 import Vue from "vue";
-import HztlUi from "hztl-ui/lib/hztl-ui.common";
-import "hztl-ui/lib/theme-chalk/index.css";
+import HztlUi from "hztl-ui/src/index";
+import "hztl-ui/packages/theme-chalk/src/index.scss";
 
 import App from "./App.vue";
 

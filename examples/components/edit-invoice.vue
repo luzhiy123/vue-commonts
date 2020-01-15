@@ -100,8 +100,8 @@ export default {
     },
     methods: {
         log(value) {
-            this.templateData = value;
-            console.log(value);
+            this.templateData = value.templateData;
+            this.invoiceName = value.name;
         }
     }
 };

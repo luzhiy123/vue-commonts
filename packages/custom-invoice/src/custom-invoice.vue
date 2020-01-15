@@ -41,6 +41,7 @@ export default {
 
     data() {
         return {
+            invoiceName: "",
             altHeaderFiles: [],
             altBodyFiles: [],
             altTemplateData: cloneDeep(defaultTemplateData)
@@ -58,6 +59,7 @@ export default {
              *  2、字段区域需要过滤，模版区域中已经存在的剔除
              * 
              */
+            this.invoiceNameChange(this.name);
             this.altTemplateData = cloneDeep(this.templateData);
             this.altHeaderFiles = this.headerFiles
                 .filter(item =>
@@ -80,7 +82,13 @@ export default {
                 }));
         },
         saveAll() {
-            this.$emit("templateChange", this.altTemplateData);
+            this.$emit("templateChange", {
+                name:  this.invoiceName,
+                templateData: this.altTemplateData
+            });
+        },
+        invoiceNameChange(value) {
+            this.invoiceName = value;
         }
     },
     render() {
@@ -89,6 +97,8 @@ export default {
                 <InvoiceAlternative
                     headerFiles={this.altHeaderFiles}
                     bodyFiles={this.altBodyFiles}
+                    invoiceName={this.invoiceName}
+                    on-name-change={this.invoiceNameChange}
                 />
                 <div class="flex-container column-flex invoice-warp-content">
                     <div class="button-group">
