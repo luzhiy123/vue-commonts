@@ -1,20 +1,10 @@
 <script>
-import draggable from "vuedraggable";
 import HtInput from "hztl-ui/packages/input";
-import { createNamespacedHelpers } from "vuex";
+import { mapState, mapGetters, mapMutations } from "vuex";
 
-const { mapState, mapGetters, mapMutations } = createNamespacedHelpers(
-    "invoice"
-);
-
-import AlternativeFiles from "./alternative-files";
+import { AlternativeFiles } from "./components";
 
 export default {
-    components: {
-        draggable,
-        HtInput,
-        AlternativeFiles
-    },
     computed: {
         ...mapState(["invoice"]),
         ...mapGetters(["altHeaderFiles", "altBodyFiles"]),
@@ -55,7 +45,11 @@ export default {
                 </div>
                 <div class="ht-invoice-alternative-box auto-block flex-container column-flex">
                     <div class="sub-title">&nbsp;·&nbsp;标题列数据</div>
-                    <AlternativeFiles class="auto-block" group="body" list={this.altBodyFiles} />
+                    <AlternativeFiles
+                        class="auto-block"
+                        group="body"
+                        list={this.altBodyFiles}
+                    />
                 </div>
             </div>
         );

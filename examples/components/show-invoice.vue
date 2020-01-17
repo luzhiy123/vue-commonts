@@ -1,5 +1,5 @@
 <template>
-    <ht-custom-invoice
+    <ht-tem-invoice
         :baseFiles="baseFiles"
         :invoiceData="invoiceData"
         v-bind="$attrs"
@@ -23,7 +23,7 @@ export default {
                 baseBodys: BASE_BODY
             }
         };
-    }
+    },
 };
 </script>
 

@@ -10,30 +10,21 @@ export default {
             required: true
         }
     },
-    mounted() {
-        
-    },
-    methods: {
-        handleDraggableEnd(...a) {
-            console.log(a);
-        }
-    },
     render() {
-        const listeners = {...this.listeners, end: this.handleDraggableEnd }
         return (
             <div class="ht-alternative-files">
                 <Draggable
-                    class="list-group"
+                    class="ht-invoice-draggable-group"
                     attrs={this.$attrs}
-                    on={listeners}
+                    on={this.listeners}
                     list={this.list}
                 >
                     {
                         this.$scopedSlots.default ? this.$scopedSlots.default(this.list) :this.list.map(file => (
                             <div class="list-group-item">
                                 <div class="file-item file-name text-ellipsis">{file.name}：</div>
-                                <div class="file-item file-value text-ellipsis">
-                                [{file.disvalue}]
+                                <div class="file-item ht-invoice-sample-class text-ellipsis">
+                                [{file.disValue}]
                                 </div>
                             </div>
                         ))

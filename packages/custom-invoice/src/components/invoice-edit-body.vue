@@ -1,13 +1,9 @@
 <script>
 import debounce from "throttle-debounce/debounce";
 import AlternativeFiles from "./alternative-files";
-import ResizeBox from "../../resize-box";
+import HtResizeBox from "hztl-ui/packages/resize-box";
 
 export default {
-    components: {
-        AlternativeFiles,
-        HtResizeBox: ResizeBox
-    },
     props: {
         templateData: {
             type: Array,
@@ -60,10 +56,10 @@ export default {
                                                 {file.name}
                                             </div>
                                             <div
-                                                class="file-item file-value text-ellipsis"
-                                                title={file.disvalue}
+                                                class="file-item ht-invoice-sample-class text-ellipsis"
+                                                title={file.disValue}
                                             >
-                                                [{file.disvalue}]
+                                                [{file.disValue}]
                                             </div>
                                         </div>
                                     </HtResizeBox>

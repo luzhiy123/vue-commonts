@@ -2,9 +2,6 @@
 import AlternativeFiles from "./alternative-files";
 
 export default {
-    components: {
-        AlternativeFiles
-    },
     props: {
         templateData: {
             type: Array,
@@ -34,8 +31,8 @@ export default {
                                         <div class="file-item file-name text-ellipsis">
                                             {file.name}：
                                         </div>
-                                        <div class="file-item file-value text-ellipsis">
-                                            [{file.disvalue}]
+                                        <div class="file-item ht-invoice-sample-class text-ellipsis">
+                                            [{file.disValue}]
                                         </div>
                                     </div>
                                 ))

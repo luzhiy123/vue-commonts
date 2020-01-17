@@ -5,6 +5,7 @@ import ElementUI, { install } from "element-ui";
 import Input from "../packages/input/index.js";
 import Autocomplete from "../packages/autocomplete/index.js";
 import CustomInvoice from "../packages/custom-invoice/index.js";
+import TemInvoice from "../packages/tem-invoice/index.js";
 import ResizeBox from "../packages/resize-box/index.js";
 
 import "element-ui/lib/theme-chalk/index.css";
@@ -13,6 +14,7 @@ const components = [
     Input,
     Autocomplete,
     CustomInvoice,
+    TemInvoice,
     ResizeBox,
 ];
 
@@ -34,5 +36,6 @@ export default {
     Input,
     Autocomplete,
     CustomInvoice,
+    TemInvoice,
     ResizeBox
 };

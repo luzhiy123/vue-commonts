@@ -1,23 +1,16 @@
 
 <script>
-import { createNamespacedHelpers } from "vuex";
+import { mapMutations, mapState } from "vuex";
 import Draggable from "vuedraggable";
-const { mapMutations } = createNamespacedHelpers("invoice");
 
-import store from "./store";
+import { makeEditInvoiceStore } from "./store";
+
 import InvoiceAlternative from "./invoice-alternative";
-import InvoiceWarp from "./invoice-warp";
+import InvoiceEditWarp from "./invoice-edit-warp";
 
 export default {
     name: "HtCustomInvoice",
     componentName: "HtCustomInvoice",
-    components: {
-        InvoiceAlternative,
-        InvoiceWarp,
-        Draggable
-    },
-    store,
-
     props: {
         invoiceData: {
             type: Object,
@@ -28,8 +21,28 @@ export default {
             required: true
         }
     },
+    computed: {
+        ...mapState([
+            "invoice",
+            "templateHeader",
+            "templateBody",
+            "templateFooter"
+        ])
+    },
+    watch: {
+        baseFiles() {
+            this.initData();
+        },
+        invoiceData() {
+            this.setTemplateData(this.invoiceData);
+        }
+    },
+    beforeCreate() {
+        // 该方式回重置store，导致外部引入store无法使用，只在纯粹无外部store依赖的组件中使用
+        this.$store = makeEditInvoiceStore();
+    },
     mounted() {
-        this.setBaseFiles(this.baseFiles);
+        this.initData();
     },
     methods: {
         ...mapMutations(["setBaseFiles", "setTemplateData"]),
@@ -38,7 +51,21 @@ export default {
             this.setTemplateData(this.invoiceData);
         },
         saveAll() {
-            this.$emit("templateChange");
+            this.$emit("template-change", {
+                ...this.invoice,
+                content: {
+                    templateHeader: this.templateHeader.map(item => ({
+                        name: item.name
+                    })),
+                    templateBody: this.templateBody.map(item => ({
+                        name: item.name,
+                        width: item.width
+                    })),
+                    templateFooter: this.templateFooter.map(item => ({
+                        name: item.name
+                    }))
+                }
+            });
         }
     },
     render() {
@@ -51,6 +78,7 @@ export default {
                     put: () => true,
                     pull: false
                 }}
+                handle=".no-trash-handle"
             >
                 <div class="flex-container ht-custom-invoice">
                     <InvoiceAlternative />
@@ -66,7 +94,7 @@ export default {
                                 &nbsp; 保存
                             </a>
                         </div>
-                        <InvoiceWarp class="auto-block" />
+                        <InvoiceEditWarp class="auto-block" />
                     </div>
                 </div>
             </Draggable>

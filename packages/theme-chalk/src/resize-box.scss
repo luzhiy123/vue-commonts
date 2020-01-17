@@ -5,17 +5,20 @@
     height: 100%;
     width: 100%;
     position: relative;
-    border: 1px solid $border-color-light;
+    .resize-handle {
+        flex: auto;
+    }
     .right-resize-slider {
         position: absolute;
         top: 0;
         right: 0;
         height: 100%;
         width: 1px;
-        background: $border-color-light;
+        background: #000;
         cursor: col-resize;
         &:hover {
             width: 10px;
+            background: $border-color-light;
         }
     }
 }
