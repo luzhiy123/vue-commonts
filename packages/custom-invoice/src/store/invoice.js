@@ -1,6 +1,7 @@
 
 function state() {
     return {
+        typeEmun: {},
         invoice: {
             name: "",
             type: "",
@@ -37,18 +38,24 @@ const getters = {
 }
 
 export const mutations = {
+    setTypeEmun(state, typeEmun) {
+        state.typeEmun = typeEmun;
+    },
     setBaseFiles(state, baseFiles) {
         if (!baseFiles || !baseFiles.baseHeaders || !baseFiles.baseBodys) {
             console.error("baseFiles 参数缺失", baseFiles)
+            state.baseHeaders = []
+            state.baseBodys = []
+        } else {
+            state.baseHeaders = baseFiles.baseHeaders;
+            state.baseBodys = baseFiles.baseBodys;
         }
-        state.baseHeaders = baseFiles.baseHeaders;
-        state.baseBodys = baseFiles.baseBodys;
     },
     setTemplateData(state, invoiceData) {
         state.invoice = {
             name: invoiceData.name,
             type: invoiceData.type,
-            id: invoiceData.type,
+            id: invoiceData.id,
         };
         const contentData = invoiceData.content ? {
             templateHeader: [],

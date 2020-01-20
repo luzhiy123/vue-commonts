@@ -14,7 +14,7 @@ export default {
         };
     },
     computed: {
-        ...mapState(["invoice"])
+        ...mapState(["invoice", "typeEmun"])
     },
     render() {
         return (
@@ -43,7 +43,7 @@ export default {
                     }`}
                 >
                     {this.showSample ? "[公司名称]" : this.header.companyName}
-                    {this.invoice.type}
+                    {this.typeEmun[this.invoice.type]}
                 </div>
             </div>
         );

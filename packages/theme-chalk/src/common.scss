@@ -50,7 +50,7 @@ img {
     &.column-flex {
         height: 100%;
         flex-direction: column;
-        .auto-block {
+        >.auto-block {
             height: 1px; 
         }
     }
@@ -71,4 +71,10 @@ img {
 .link {
     cursor: pointer;
     color: $color-primary;
+}
+
+.ht-single-tree {
+    .el-tree-node.is-checked>.el-tree-node__content {
+        background-color: #f0f7ff;
+    }
 }

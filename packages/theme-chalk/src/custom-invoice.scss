@@ -144,6 +144,7 @@
 .ht-invoice-edit-body {
     margin: 5px 0;
     height: 60px;
+    border-right: 1px dashed $border-color-light;
 
     .ht-invoice-draggable-group {
         display: flex;
@@ -180,18 +181,15 @@
 
 .ht-invoice-edit-warp {
     background-color: #000;
-    width: 900px;
+    width: 100%;
     padding: 20px;
-
-    * {
-        color: #000;
-        background-color: #fff;
-    }
-
+    
     .ht-invoice-edit-box {
         padding: 10px;
         height: 100%;
         overflow: auto;
+        color: #000;
+        background-color: #fff;
     }
 
     .ht-invoice-edit-content-box {
@@ -220,7 +218,8 @@
     }
 
     .invoice-warp-content {
-        width: 900px;
+        width: 920px;
+        flex: none;
     }
 
     .button-group {

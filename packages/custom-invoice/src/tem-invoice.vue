@@ -15,6 +15,7 @@ export default {
     componentName: "HtTemInvoice",
     props: {
         showSample: Boolean,
+        typeEmun: Object,
         invoiceData: {
             type: Object,
             required: true
@@ -54,8 +55,9 @@ export default {
         this.initData();
     },
     methods: {
-        ...mapMutations(["setBaseFiles", "setTemplateData"]),
+        ...mapMutations(["setBaseFiles", "setTemplateData", "setTypeEmun"]),
         initData() {
+            this.setTypeEmun(this.typeEmun);
             this.setBaseFiles(this.baseFiles);
             this.setTemplateData(this.invoiceData);
         }
@@ -66,6 +68,7 @@ export default {
                 <div class="ht-invoice-tem-content">
                     <InvoicePageHeader
                         showSample={this.showSample}
+                        typeEmun={this.typeEmun}
                         header={this.headerData}
                     />
                     <InvoiceTemHeader

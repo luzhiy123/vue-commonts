@@ -12,6 +12,7 @@ export default {
     name: "HtCustomInvoice",
     componentName: "HtCustomInvoice",
     props: {
+        typeEmun: Object,
         invoiceData: {
             type: Object,
             required: true
@@ -45,15 +46,16 @@ export default {
         this.initData();
     },
     methods: {
-        ...mapMutations(["setBaseFiles", "setTemplateData"]),
+        ...mapMutations(["setBaseFiles", "setTemplateData", "setTypeEmun"]),
         initData() {
+            this.setTypeEmun(this.typeEmun);
             this.setBaseFiles(this.baseFiles);
             this.setTemplateData(this.invoiceData);
         },
         saveAll() {
             this.$emit("template-change", {
                 ...this.invoice,
-                content: {
+                content: JSON.stringify({
                     templateHeader: this.templateHeader.map(item => ({
                         name: item.name
                     })),
@@ -64,7 +66,7 @@ export default {
                     templateFooter: this.templateFooter.map(item => ({
                         name: item.name
                     }))
-                }
+                })
             });
         }
     },

@@ -1,11 +1,12 @@
 @import "./var";
 
 .ht-invoice-tem-warp {
-    width: 900px;
+    width: 860px;
     padding: 20px;
     font-size: 12px;
     background-color: #fff;
     min-height: 100%;
+    margin: auto;
 
     * {
         color: #000;
@@ -20,6 +21,11 @@
         min-height: 100%;
     }
 
+}
+
+.ht-invoice-tem-header .ht-invoice-draggable-group {
+    display: flex;
+    flex-wrap: wrap;
 }
 
 .ht-invoice-tem-body {
