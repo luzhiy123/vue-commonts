@@ -5,8 +5,7 @@ import { mapState } from "vuex";
 
 export default {
     props: {
-        showSample: Boolean,
-        header: Object
+        showSample: Boolean
     },
     data() {
         return {
@@ -14,7 +13,7 @@ export default {
         };
     },
     computed: {
-        ...mapState(["invoice", "typeEmun"])
+        ...mapState(["invoice", "typeEmun", "headerData"])
     },
     render() {
         return (
@@ -24,7 +23,7 @@ export default {
                         [公司徽章]
                     </div>
                 ) : (
-                    <img src={this.header.companyEmblem} alt="" />
+                    <img class="company-logo" src={this.headerData.companyEmblem} alt="" />
                 )}
                 <span class="page-header-tip">
                     <span class="title">打印时间：</span>
@@ -34,7 +33,7 @@ export default {
                         }`}
                     >
                         {dateFormatFull(this.curDate)}（
-                        {this.showSample ? 0 : this.header.printCount})
+                        {this.headerData.printCount})
                     </span>
                 </span>
                 <div
@@ -42,7 +41,7 @@ export default {
                         this.showSample ? "ht-invoice-sample-class" : ""
                     }`}
                 >
-                    {this.showSample ? "[公司名称]" : this.header.companyName}
+                    {this.headerData.companyName}
                     {this.typeEmun[this.invoice.type]}
                 </div>
             </div>

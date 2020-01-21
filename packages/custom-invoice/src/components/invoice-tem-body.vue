@@ -1,29 +1,16 @@
 <script>
+import { mapState } from "vuex";
+
 export default {
     props: {
         showSample: Boolean,
-        data: Array,
         templateData: {
             type: Array,
             required: true
         },
     },
     computed: {
-        useData() {
-            let data;
-            if (this.showSample) {
-                data = [{}];
-                const sampleData = data[0];
-                this.templateData.forEach(item => {
-                    if (item.file) {
-                        sampleData[item.file] = item.disValue;
-                    }
-                });
-            } else {
-                data = this.printData;
-            }
-            return data;
-        },
+        ...mapState(["detailsData"]),
         columns() {
             return this.templateData.map(item => {
                 let formatter;
@@ -50,7 +37,7 @@ export default {
         return (
             <div class="ht-invoice-tem-body">
                 <el-table
-                    data={this.useData}
+                    data={this.detailsData}
                     border
                     row-class-name={this.showSample ? "ht-invoice-sample-class" : ""}
                     tooltip-effect="dark"

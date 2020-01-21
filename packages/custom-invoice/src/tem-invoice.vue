@@ -1,6 +1,6 @@
 
 <script>
-import { mapState, mapMutations } from "vuex";
+import { mapState, mapMutations, mapActions } from "vuex";
 
 import { makeInvoiceTemplateStore } from "./store";
 import {
@@ -16,7 +16,7 @@ export default {
     props: {
         showSample: Boolean,
         typeEmun: Object,
-        invoiceData: {
+        temData: {
             type: Object,
             required: true
         },
@@ -24,11 +24,8 @@ export default {
             type: Object,
             required: true
         },
-        headerData: {
+        invoiceData: {
             type: Object
-        },
-        bodyData: {
-            type: Array
         }
     },
     computed: {
@@ -40,26 +37,36 @@ export default {
         ])
     },
     watch: {
-        baseFiles() {
-            this.initData();
+        baseFiles: {
+            immediate: true,
+            handler() {
+                this.$nextTick(() => {
+                    this.initData();
+                })
+            }
+        },
+        temData() {
+            this.setTemplateData(this.temData);
         },
         invoiceData() {
-            this.setTemplateData(this.invoiceData);
+            this.initInvoiceData(this.invoiceData);
         }
     },
     created() {
         // 该方式回重置store，导致外部引入store无法使用，只在纯粹无外部store依赖的组件中使用
         this.$store = makeInvoiceTemplateStore();
     },
-    mounted() {
-        this.initData();
-    },
     methods: {
-        ...mapMutations(["setBaseFiles", "setTemplateData", "setTypeEmun"]),
+        ...mapActions(["initStoreData"]),
+        ...mapMutations(["setTemplateData", "initInvoiceData"]),
         initData() {
-            this.setTypeEmun(this.typeEmun);
-            this.setBaseFiles(this.baseFiles);
-            this.setTemplateData(this.invoiceData);
+            this.initStoreData({
+                typeEmun: this.typeEmun,
+                baseFiles: this.baseFiles,
+                temData: this.temData,
+                showSample: this.showSample,
+                invoiceData: this.invoiceData
+            });
         }
     },
     render() {

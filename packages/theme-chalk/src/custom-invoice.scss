@@ -24,7 +24,9 @@
         min-width: 60px;
         height: 60px;
         line-height: 60px;
-        border: 1px solid $color-text-secondary;
+        &.ht-invoice-sample-class {
+            border: 1px solid $color-text-secondary;
+        }
     }
 }
 
@@ -42,7 +44,6 @@
 
     .list-group-item {
         display: flex;
-        flex-wrap: wrap;
 
         &[draggable=true] {
             background: rgba($color-bg-primary, 0.3);
@@ -50,6 +51,9 @@
 
         .file-item {
             display: inline-block;
+            &.file-name {
+                flex: none;
+            }
         }
 
         &.item-flex-1 {

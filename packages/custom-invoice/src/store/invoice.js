@@ -1,17 +1,43 @@
+const baseState = {
+    showSample: true,
+    typeEmun: {},
+    invoice: {
+        name: "",
+        type: "",
+        id: ""
+    },
+    baseHeaders: [],
+    baseBodys: [],
+    templateHeader: [],
+    templateBody: [],
+    templateFooter: [],
+    headerData: {},
+    detailsData: []
+}
 
-function state() {
+function editState() {
     return {
-        typeEmun: {},
-        invoice: {
-            name: "",
-            type: "",
-            id: ""
-        },
-        baseHeaders: [],
-        baseBodys: [],
-        templateHeader: [],
-        templateBody: [],
-        templateFooter: [],
+        type: "edit",
+        ...baseState
+    }
+}
+
+function temState() {
+    return {
+        type: "tem",
+        ...baseState
+    }
+}
+
+
+const actions = {
+    async initStoreData({ commit }, payload) {
+        const { typeEmun, baseFiles, temData, showSample, invoiceData } = payload;
+        await commit("setShowSample", showSample);
+        await commit("setTypeEmun", typeEmun);
+        await commit("setBaseFiles", baseFiles);
+        await commit("setTemplateData", temData);
+        await commit("initInvoiceData", invoiceData);
     }
 }
 
@@ -37,7 +63,7 @@ const getters = {
     },
 }
 
-export const mutations = {
+const baseMutations = {
     setTypeEmun(state, typeEmun) {
         state.typeEmun = typeEmun;
     },
@@ -51,22 +77,19 @@ export const mutations = {
             state.baseBodys = baseFiles.baseBodys;
         }
     },
-    setTemplateData(state, invoiceData) {
+    setTemplateData(state, templateData) {
         state.invoice = {
-            name: invoiceData.name,
-            type: invoiceData.type,
-            id: invoiceData.id,
+            name: templateData.name,
+            type: templateData.type,
+            id: templateData.id,
         };
-        const contentData = invoiceData.content ? {
+        const content = templateData.content ? JSON.parse(templateData.content) : {};
+        const contentData = {
             templateHeader: [],
             templateBody: [],
             templateFooter: [],
-            ...invoiceData.content,
-        }: {
-            templateHeader: [],
-            templateBody: [],
-            templateFooter: [],
-        };
+            ...content,
+        }
 
         /**
          * 1、基于字段名设置，采用本地备选数据
@@ -94,6 +117,36 @@ export const mutations = {
             return "";
         }).filter(item => item);
     },
+    setShowSample(state, showSample = true) {
+        state.showSample = showSample;
+    },
+    initInvoiceData(state, invoiceData) {
+        if (state.showSample) {
+            const headerData = {
+                printCount: 0,
+                companyName: "[公司名称]"
+            }
+            const detailsData = [{}];
+            const sampleData = detailsData[0];
+            state.baseBodys.forEach(item => {
+                if (item.file) {
+                    sampleData[item.file] = item.disValue;
+                }
+            });
+            state.baseHeaders.forEach(item => {
+                headerData[item.file] = `[${item.disValue}]`
+            })
+            state.headerData = headerData;
+            state.detailsData = detailsData;
+        } else if (invoiceData) {
+            state.headerData = invoiceData.header;
+            state.detailsData = invoiceData.details;
+        }
+    }
+}
+
+const editMutations = {
+    ...baseMutations,
     changeInvoiceName(state, name) {
         state.invoice.name = name;
     },
@@ -108,15 +161,20 @@ export const mutations = {
     }
 }
 
+const temMutations = {
+    ...baseMutations,
+}
+
 export const editInvoice = {
-    namespaced: true,
-    state,
+    state: editState,
+    actions,
     getters,
-    mutations
+    mutations: editMutations
 }
 
 export const invoiceTemplate = {
-    state,
+    state: temState,
+    actions,
     getters,
-    mutations
+    mutations: temMutations
 }

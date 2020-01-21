@@ -1,6 +1,6 @@
 
 <script>
-import { mapMutations, mapState } from "vuex";
+import { mapActions, mapMutations, mapState } from "vuex";
 import Draggable from "vuedraggable";
 
 import { makeEditInvoiceStore } from "./store";
@@ -13,7 +13,7 @@ export default {
     componentName: "HtCustomInvoice",
     props: {
         typeEmun: Object,
-        invoiceData: {
+        temData: {
             type: Object,
             required: true
         },
@@ -31,26 +31,33 @@ export default {
         ])
     },
     watch: {
-        baseFiles() {
-            this.initData();
+        baseFiles: {
+            immediate: true,
+            handler() {
+                this.$nextTick(() => {
+                    this.initData();
+                })
+            }
         },
-        invoiceData() {
-            this.setTemplateData(this.invoiceData);
-        }
+        temData() {
+            this.setTemplateData(this.temData);
+        },
     },
     beforeCreate() {
         // 该方式回重置store，导致外部引入store无法使用，只在纯粹无外部store依赖的组件中使用
         this.$store = makeEditInvoiceStore();
     },
-    mounted() {
-        this.initData();
-    },
     methods: {
-        ...mapMutations(["setBaseFiles", "setTemplateData", "setTypeEmun"]),
+        ...mapActions([
+            "initStoreData"
+        ]),
+        ...mapMutations(["setTemplateData"]),
         initData() {
-            this.setTypeEmun(this.typeEmun);
-            this.setBaseFiles(this.baseFiles);
-            this.setTemplateData(this.invoiceData);
+            this.initStoreData({
+                typeEmun: this.typeEmun,
+                baseFiles: this.baseFiles,
+                temData: this.temData,
+            });
         },
         saveAll() {
             this.$emit("template-change", {
