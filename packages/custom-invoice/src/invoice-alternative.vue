@@ -13,7 +13,7 @@ export default {
                 return this.invoice.name;
             },
             set(value) {
-                this.changeInvoiceName(value);
+                this.changeInvoiceName(value.replace(/ /g, ""));
             }
         }
     },
