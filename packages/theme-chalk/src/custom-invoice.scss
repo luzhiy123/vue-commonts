@@ -51,8 +51,13 @@
 
         .file-item {
             display: inline-block;
+            padding-right: 5px;
+            flex: auto;
             &.file-name {
                 flex: none;
+            }
+            &.signature-file {
+                border-bottom: 1px solid #000;
             }
         }
 

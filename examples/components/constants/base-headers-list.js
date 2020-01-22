@@ -148,5 +148,13 @@ export const BASE_HEADERS_LIST = {
             width: 1,
             file: "peerOrderNo"
         },
+        {
+
+            name: "签字",
+            sampleData: "签字留白",
+            width: 1,
+            type: "signature",
+            file: "_signature"
+        }
     ]
 }

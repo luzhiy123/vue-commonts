@@ -20,7 +20,11 @@ export default {
                     ...item
                 };
                 if (this.showSample) {
-                    file.formatter = value => `[${value}]`;
+                    if (file.type === "signature") {
+                        file.formatter = () => "";
+                    } else {
+                        file.formatter = value => `[${value}]`;
+                    }
                 } else {
                     switch (file.type) {
                         case "date":
@@ -31,6 +35,9 @@ export default {
                             break;
                         case "areaNames":
                             file.formatter = value => value.join("");
+                            break;
+                        case "signature":
+                            file.formatter = () => "";
                             break;
                         default:
                             file.formatter = value => value;
@@ -51,6 +58,10 @@ export default {
                                 class={`file-item ${
                                     this.showSample
                                         ? "ht-invoice-sample-class"
+                                        : ""
+                                } ${
+                                    item.type === "signature"
+                                        ? "signature-file"
                                         : ""
                                 } text-ellipsis`}
                             >

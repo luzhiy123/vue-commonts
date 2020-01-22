@@ -23,9 +23,11 @@
 
 }
 
-.ht-invoice-tem-header .ht-invoice-draggable-group {
-    display: flex;
-    flex-wrap: wrap;
+.ht-invoice-tem-header {
+    .ht-invoice-draggable-group {
+        display: flex;
+        flex-wrap: wrap;
+    }
 }
 
 .ht-invoice-tem-body {

@@ -10,7 +10,7 @@ export default {
         }
     },
     computed: {
-        ...mapState(["headerData"]),
+        ...mapState(["headerData"])
     },
     methods: {
         handleTemplateChange(data) {
@@ -28,23 +28,31 @@ export default {
                     scopedSlots={{
                         default: list =>
                             list.length ? (
-                                list.map(file => (
+                                list.map(item => (
                                     <div
-                                        class={`list-group-item item-flex-${file.width}`}
+                                        class={`list-group-item item-flex-${item.width}`}
                                     >
                                         <div class="file-item file-name text-ellipsis">
-                                            {file.name}：
+                                            {item.name}：
                                         </div>
-                                        <div class="file-item ht-invoice-sample-class text-ellipsis">
-                                            [{this.headerData[file.file]}]
+                                        <div
+                                            class={`file-item ${
+                                                item.type === "signature"
+                                                    ? "signature-file"
+                                                    : ""
+                                            } ht-invoice-sample-class text-ellipsis`}
+                                        >
+                                            {item.type === "signature"
+                                                ? ""
+                                                : `[${
+                                                    this.headerData[item.file]
+                                                }]`}
                                         </div>
                                     </div>
                                 ))
                             ) : (
-                                <div
-                                    class="no-data"
-                                >
-                                拖拽页头页尾部字段设置
+                                <div class="no-data">
+                                    拖拽页头页尾部字段设置
                                 </div>
                             )
                     }}
