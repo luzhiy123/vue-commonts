@@ -18,6 +18,7 @@ utilsList.forEach(function (file) {
 const baseExternals = [
     nodeExternals(),
     "vue",
+    /dayjs/,
     /^element-ui/,
     /^throttle-debounce/
 ];

@@ -130,11 +130,11 @@ const baseMutations = {
             const sampleData = detailsData[0];
             state.baseBodys.forEach(item => {
                 if (item.file) {
-                    sampleData[item.file] = item.disValue;
+                    sampleData[item.file] = item.sampleData || item.name;
                 }
             });
             state.baseHeaders.forEach(item => {
-                headerData[item.file] = `[${item.disValue}]`
+                headerData[item.file] = item.sampleData || item.name
             })
             state.headerData = headerData;
             state.detailsData = detailsData;

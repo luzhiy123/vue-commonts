@@ -26,6 +26,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "dayjs": "^1.8.19",
     "element-ui": "2.8.2",
     "loadsh": "0.0.4",
     "throttle-debounce": "^1.0.1",

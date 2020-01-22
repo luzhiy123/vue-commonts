@@ -1,7 +1,8 @@
 <script>
 import debounce from "throttle-debounce/debounce";
-import AlternativeFiles from "./alternative-files";
+import { mapState } from "vuex";
 import HtResizeBox from "hztl-ui/packages/resize-box";
+import AlternativeFiles from "./alternative-files";
 
 export default {
     props: {
@@ -17,6 +18,12 @@ export default {
                 this.handleTemplateChange
             )
         };
+    },
+    computed: {
+        ...mapState(["detailsData"]),
+        detail() {
+            return this.detailsData[0] ? this.detailsData[0] : {}
+        }
     },
     methods: {
         handleTemplateChange(data) {
@@ -39,27 +46,27 @@ export default {
                     scopedSlots={{
                         default: list =>
                             list.length ? (
-                                list.map(file => (
+                                list.map(item => (
                                     <HtResizeBox
-                                        width={file.width}
+                                        width={item.width}
                                         on-change-width={width =>
-                                            this.handleChangeWidth(width, file)
+                                            this.handleChangeWidth(width, item)
                                         }
                                         class="list-group-item"
-                                        style={{ width: `${file.width}px` }}
+                                        style={{ width: `${item.width}px` }}
                                     >
                                         <div class="dragghandle">
                                             <div
                                                 class="file-item file-name text-ellipsis"
-                                                title={file.name}
+                                                title={item.name}
                                             >
-                                                {file.name}
+                                                {item.name}
                                             </div>
                                             <div
                                                 class="file-item ht-invoice-sample-class text-ellipsis"
-                                                title={file.disValue}
+                                                title={this.detail[item.file]}
                                             >
-                                                [{file.disValue}]
+                                                [{this.detail[item.file]}]
                                             </div>
                                         </div>
                                     </HtResizeBox>

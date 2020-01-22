@@ -24,7 +24,7 @@ export default {
                             <div class="list-group-item">
                                 <div class="file-item file-name text-ellipsis">{file.name}：</div>
                                 <div class="file-item ht-invoice-sample-class text-ellipsis">
-                                [{file.disValue}]
+                                [{file.sampleData || file.name}]
                                 </div>
                             </div>
                         ))

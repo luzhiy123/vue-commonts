@@ -1,6 +1,9 @@
 <script>
 import { mapState } from "vuex";
 
+import { dateFormat } from "hztl-ui/src/utils/date-util";
+import priceUppercase from "hztl-ui/src/utils/priceUppercase";
+
 export default {
     props: {
         showSample: Boolean,
@@ -10,23 +13,48 @@ export default {
         }
     },
     computed: {
-        ...mapState(["headerData"])
+        ...mapState(["headerData"]),
+        formatTemplateData() {
+            return this.templateData.map(item => {
+                const file = {
+                    ...item
+                };
+                if (this.showSample) {
+                    file.formatter = value => `[${value}]`;
+                } else {
+                    switch (file.type) {
+                        case "date":
+                            file.formatter = dateFormat;
+                            break;
+                        case "uppercase":
+                            file.formatter = priceUppercase;
+                            break;
+                        case "areaNames":
+                            file.formatter = value => value.join("");
+                            break;
+                        default:
+                            file.formatter = value => value;
+                    }
+                }
+                return file;
+            });
+        }
     },
     render() {
         return (
             <div class="ht-invoice-tem-header">
                 <div class="ht-invoice-draggable-group">
-                    {this.templateData.map(item => (
+                    {this.formatTemplateData.map(item => (
                         <div class={`list-group-item item-flex-${item.width}`}>
-                            <div class="file-item file-name">
-                                {item.name}：
-                            </div>
+                            <div class="file-item file-name">{item.name}：</div>
                             <div
                                 class={`file-item ${
-                                    this.showSample ? "ht-invoice-sample-class" : ""
+                                    this.showSample
+                                        ? "ht-invoice-sample-class"
+                                        : ""
                                 } text-ellipsis`}
                             >
-                                {this.headerData[item.file]}
+                                {item.formatter(this.headerData[item.file])}
                             </div>
                         </div>
                     ))}

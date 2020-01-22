@@ -1,15 +1,15 @@
-import dayjs from "element-ui/lib/utils/date";
+import dayjs from "dayjs";
 
-export function dateFormat(date, rule = "yyyy-MM-DD") {
-    return date ? dayjs.format(date, rule) : "";
+export function dateFormat(date, rule = "YYYY-MM-DD") {
+    return date ? dayjs(date).format(rule) : "";
 }
 
 export function dateFormatFull(date) {
-    return dateFormat(date, "yyyy-MM-DD HH:mm");
+    return dateFormat(date, "YYYY-MM-DD HH:mm");
 }
 
 export function dateFormatToSecond(date) {
-    return dateFormat(date, "yyyy-MM-DD HH:mm:ss")
+    return dateFormat(date, "YYYY-MM-DD HH:mm:ss")
 }
 
 export function getLimtCurTime(time, type = "time") {

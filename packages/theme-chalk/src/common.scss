@@ -73,6 +73,21 @@ img {
     color: $color-primary;
 }
 
+.ht-page-title {
+    position: relative;
+    padding-left: 10px;
+    &::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        width: 5px;
+        display: inline-block;
+        background: #3aa7ff;
+        height: 100%;
+        vertical-align: middle;
+        border-radius: 100px;
+    }
+}
 .ht-single-tree {
     .el-tree-node.is-checked>.el-tree-node__content {
         background-color: #f0f7ff;

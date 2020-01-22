@@ -1,4 +1,5 @@
 <script>
+import { mapState } from "vuex";
 import AlternativeFiles from "./alternative-files";
 
 export default {
@@ -7,6 +8,9 @@ export default {
             type: Array,
             required: true
         }
+    },
+    computed: {
+        ...mapState(["headerData"]),
     },
     methods: {
         handleTemplateChange(data) {
@@ -32,7 +36,7 @@ export default {
                                             {file.name}：
                                         </div>
                                         <div class="file-item ht-invoice-sample-class text-ellipsis">
-                                            [{file.disValue}]
+                                            [{this.headerData[file.file]}]
                                         </div>
                                     </div>
                                 ))
