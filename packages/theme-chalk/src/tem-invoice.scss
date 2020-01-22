@@ -2,7 +2,7 @@
 
 .ht-invoice-tem-warp {
     width: 860px;
-    padding: 20px;
+    padding: 12px;
     font-size: 12px;
     background-color: #fff;
     min-height: 100%;
@@ -20,7 +20,9 @@
         background-color: #fff;
         min-height: 100%;
     }
-
+    .el-table--scrollable-x .el-table__body-wrapper {
+        overflow-x: hidden;
+    }
 }
 
 .ht-invoice-tem-header {
