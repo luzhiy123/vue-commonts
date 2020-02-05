@@ -1,6 +1,7 @@
 
 <script>
-import { mapState, mapMutations, mapActions } from "vuex";
+import { mapState, mapMutations, mapActions, mapGetters } from "vuex";
+import { INDEX_UP_CASE } from "hztl-ui/src/constants";
 
 import { makeInvoiceTemplateStore } from "./store";
 import {
@@ -29,11 +30,12 @@ export default {
         }
     },
     computed: {
-        ...mapState([
-            "invoice",
+        ...mapState(["invoice"]),
+        ...mapGetters([
             "templateHeader",
             "templateBody",
-            "templateFooter"
+            "templateFooter",
+            "bodysData"
         ])
     },
     watch: {
@@ -42,14 +44,14 @@ export default {
             handler() {
                 this.$nextTick(() => {
                     this.initData();
-                })
+                });
             }
         },
         temData() {
-            this.setTemplateData(this.temData);
+            this.setTemDataSource(this.temData);
         },
         invoiceData() {
-            this.initInvoiceData(this.invoiceData);
+            this.setDataSource(this.invoiceData);
         }
     },
     created() {
@@ -58,7 +60,7 @@ export default {
     },
     methods: {
         ...mapActions(["initStoreData"]),
-        ...mapMutations(["setTemplateData", "initInvoiceData"]),
+        ...mapMutations(["setTemDataSource", "setDataSource"]),
         initData() {
             this.initStoreData({
                 typeEmun: this.typeEmun,
@@ -73,24 +75,33 @@ export default {
         return (
             <div class="ht-invoice-tem-warp">
                 <div class="ht-invoice-tem-content">
-                    <InvoicePageHeader
-                        showSample={this.showSample}
-                        typeEmun={this.typeEmun}
-                        header={this.headerData}
-                    />
+                    <InvoicePageHeader showSample={this.showSample} />
                     <InvoiceTemHeader
                         showSample={this.showSample}
-                        header={this.headerData}
                         templateData={this.templateHeader}
                     />
-                    <InvoiceTemBody
-                        showSample={this.showSample}
-                        data={this.bodyData}
-                        templateData={this.templateBody}
-                    />
+                    <div class="ht-invoice-body-box">
+                        {this.templateBody.map((item, index) => {
+                            return (
+                                this.bodysData[item.soureFile] && (
+                                    <div class="ht-invoice-body-block">
+                                        {item.tableName && (
+                                            <div class="ht-invoice-table-name">{`${INDEX_UP_CASE[index + 1]}、${
+                                                item.tableName
+                                            }`}</div>
+                                        )}
+                                        <InvoiceTemBody
+                                            showSample={this.showSample}
+                                            data={this.bodysData[item.soureFile]}
+                                            templateData={item.content}
+                                        />
+                                    </div>
+                                )
+                            );
+                        })}
+                    </div>
                     <InvoiceTemHeader
                         showSample={this.showSample}
-                        header={this.headerData}
                         templateData={this.templateFooter}
                     />
                     <InvoicePageFooter />

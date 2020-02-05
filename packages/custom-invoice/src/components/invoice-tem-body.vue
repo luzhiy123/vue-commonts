@@ -1,5 +1,4 @@
 <script>
-import { mapState } from "vuex";
 
 export default {
     props: {
@@ -8,9 +7,12 @@ export default {
             type: Array,
             required: true
         },
+        data: {
+            type: Array,
+            required: true
+        }
     },
     computed: {
-        ...mapState(["detailsData"]),
         columns() {
             return this.templateData.map(item => {
                 let formatter;
@@ -37,7 +39,7 @@ export default {
         return (
             <div class="ht-invoice-tem-body">
                 <el-table
-                    data={this.detailsData}
+                    data={this.data}
                     border
                     row-class-name={this.showSample ? "ht-invoice-sample-class" : ""}
                     tooltip-effect="dark"

@@ -1,3 +1,4 @@
+
 const baseState = {
     showSample: true,
     typeEmun: {},
@@ -8,11 +9,12 @@ const baseState = {
     },
     baseHeaders: [],
     baseBodys: [],
-    templateHeader: [],
-    templateBody: [],
-    templateFooter: [],
-    headerData: {},
-    detailsData: []
+    temDataSource: {
+        templateHeader: [],
+        templateBody: [],
+        templateFooter: []
+    },
+    dataSource: {}
 }
 
 function editState() {
@@ -36,31 +38,96 @@ const actions = {
         await commit("setShowSample", showSample);
         await commit("setTypeEmun", typeEmun);
         await commit("setBaseFiles", baseFiles);
-        await commit("setTemplateData", temData);
-        await commit("initInvoiceData", invoiceData);
+        await commit("setTemDataSource", temData);
+        await commit("setDataSource", invoiceData);
     }
 }
 
 const getters = {
-    altHeaderFiles(state) {
+    templateHeader(state) {
+        return state.temDataSource.templateHeader.map(item => {
+            const baseData = state.baseHeaders.find(it => it.name === item.name);
+            return baseData || null;
+        }).filter(item => item);
+    },
+    templateFooter(state) {
+        return state.temDataSource.templateFooter.map(item => {
+            const baseData = state.baseHeaders.find(it => it.name === item.name);
+            return baseData || null;
+        }).filter(item => item);
+    },
+    templateBody(state) {
+        return state.temDataSource.templateBody.map(temData => {
+            return {
+                ...temData,
+                content: temData.content.map(value => {
+                    let baseData;
+                    state.baseBodys.forEach(base => {
+                        if (!baseData) {
+                            base.soureFile === temData.soureFile && base.content.forEach(it => {
+                                if (it.name === value.name) {
+                                    baseData = it;
+                                }
+                            })
+                        }
+                    })
+                    return baseData ? {
+                        ...baseData,
+                        width: value.width || 100
+                    } : null;
+                }).filter(item => item)
+            }
+        })
+    },
+    altHeaderFiles(state, getters) {
         return state.baseHeaders
             .filter(item =>
                 ![
-                    ...state.templateHeader,
-                    ...state.templateFooter
+                    ...getters.templateHeader,
+                    ...getters.templateFooter
                 ].find(it => it.name === item.name)
             )
     },
-    altBodyFiles(state) {
-        return state.baseBodys
-            .filter(item =>
-                !state.templateBody.find(it => it.name === item.name)
-            )
-            .map(item => ({
-                width: item.width || 100,
-                ...item
-            }));
+    altBodyFiles(state, getters) {
+        return state.baseBodys.map(base => {
+            return {
+                ...base,
+                content: base.content.filter(item => {
+                    const curTem = getters.templateBody.find(item => item.soureFile === base.soureFile);
+                    return curTem && !curTem.content.find(it => it.name === item.name)
+                })
+            }
+        }
+        )
     },
+    headerData(state) {
+        if (state.showSample) {
+            const headerData = {
+                printCount: 0,
+                companyName: "[公司名称]"
+            }
+            state.baseHeaders.forEach(item => {
+                headerData[item.file] = item.sampleData || item.name
+            })
+            return headerData;
+        }
+        return state.dataSource.header || {};
+    },
+    bodysData(state) {
+        if (state.showSample) {
+            let bodysData = {}
+            state.baseBodys.forEach(item => {
+                bodysData[item.soureFile] = [{}]
+                item.content.forEach(it => {
+                    {
+                        bodysData[item.soureFile][0][it.file] = it.sampleData || it.name;
+                    }
+                });
+            })
+            return bodysData;
+        }
+        return state.dataSource;
+    }
 }
 
 const baseMutations = {
@@ -71,77 +138,55 @@ const baseMutations = {
         if (!baseFiles || !baseFiles.baseHeaders || !baseFiles.baseBodys) {
             console.error("baseFiles 参数缺失", baseFiles)
             state.baseHeaders = []
-            state.baseBodys = []
+            state.baseBodys = [
+                {
+                    tableName: "",
+                    soureFile: "details",
+                    content: []
+                }
+            ]
         } else {
-            state.baseHeaders = baseFiles.baseHeaders;
-            state.baseBodys = baseFiles.baseBodys;
+            state.baseHeaders = baseFiles.baseHeaders.map(item => ({
+                ...item,
+                width: item.width || 1
+            }));
+            // 兼容单表格
+            const firstData = baseFiles.baseBodys && baseFiles.baseBodys[0]
+            if (firstData && firstData.soureFile) {
+                state.baseBodys = baseFiles.baseBodys;
+            } else {
+                state.baseBodys = [{
+                    tableName: "",
+                    soureFile: "details",
+                    content: baseFiles.baseBodys || []
+                }];
+            }
         }
     },
-    setTemplateData(state, templateData) {
+    setTemDataSource(state, templateData) {
         state.invoice = {
             name: templateData.name,
             type: templateData.type,
             id: templateData.id,
         };
         const content = templateData.content ? JSON.parse(templateData.content) : {};
-        const contentData = {
+        const firstData = content.templateBody && content.templateBody[0];
+        state.temDataSource = {
             templateHeader: [],
-            templateBody: [],
             templateFooter: [],
             ...content,
+            // 兼容旧数据
+            templateBody: firstData && firstData.soureFile ? content.templateBody : state.baseBodys.map(item => ({
+                ...item,
+                content: content.templateBody || []
+            }))
         }
-
-        /**
-         * 1、基于字段名设置，采用本地备选数据
-         * 2、过滤掉备选字段已经取消的数据
-         */
-
-        state.templateHeader = contentData.templateHeader.map(item => {
-            const baseData = state.baseHeaders.find(it => it.name === item.name);
-            return baseData || "";
-        }).filter(item => item);
-
-        state.templateFooter = contentData.templateFooter.map(item => {
-            const baseData = state.baseHeaders.find(it => it.name === item.name);
-            return baseData || "";
-        }).filter(item => item);
-
-        state.templateBody = contentData.templateBody.map(item => {
-            const baseData = state.baseBodys.find(it => it.name === item.name);
-            if (baseData) {
-                return {
-                    ...baseData,
-                    width: item.width
-                }
-            }
-            return "";
-        }).filter(item => item);
     },
     setShowSample(state, showSample = true) {
         state.showSample = showSample;
     },
-    initInvoiceData(state, invoiceData) {
-        if (state.showSample) {
-            const headerData = {
-                printCount: 0,
-                companyName: "[公司名称]"
-            }
-            const detailsData = [{}];
-            const sampleData = detailsData[0];
-            state.baseBodys.forEach(item => {
-                if (item.file) {
-                    sampleData[item.file] = item.sampleData || item.name;
-                }
-            });
-            state.baseHeaders.forEach(item => {
-                headerData[item.file] = item.sampleData || item.name
-            })
-            state.headerData = headerData;
-            state.detailsData = detailsData;
-        } else if (invoiceData) {
-            state.headerData = invoiceData.header;
-            state.detailsData = invoiceData.details;
-        }
+    setDataSource(state, invoiceData) {
+        state.dataSource = invoiceData;
     }
 }
 
@@ -151,13 +196,16 @@ const editMutations = {
         state.invoice.name = name;
     },
     changeTemplateHeader(state, data) {
-        state.templateHeader = data;
+        state.temDataSource = {
+            ...state.temDataSource,
+            templateHeader: data
+        }
     },
     changeTemplateBody(state, data) {
-        state.templateBody = data;
+        state.temDataSource.templateBody = data;
     },
     changeTemplateFooter(state, data) {
-        state.templateFooter = data;
+        state.temDataSource.templateFooter = data;
     }
 }
 

@@ -24,6 +24,7 @@
         min-width: 60px;
         height: 60px;
         line-height: 60px;
+
         &.ht-invoice-sample-class {
             border: 1px solid $color-text-secondary;
         }
@@ -53,9 +54,11 @@
             display: inline-block;
             padding-right: 5px;
             flex: auto;
+
             &.file-name {
                 flex: none;
             }
+
             &.signature-file {
                 border-bottom: 1px solid #000;
             }
@@ -111,7 +114,6 @@
 
     .ht-invoice-alternative-box {
         margin-bottom: 5px;
-        ;
     }
 
     .ht-alternative-files {
@@ -151,13 +153,31 @@
     }
 }
 
+.ht-invoice-table-name {
+    border: solid #000;
+    border-width: 0 1px;
+    height: 28px;
+    line-height: 28px;
+}
+
+.ht-invoice-body-box {
+    margin: 5px 0 10px;
+
+    .ht-invoice-body-block:first-child {
+        .ht-invoice-table-name {
+            border-top: 1px solid #000;
+        }
+    }
+}
+
 .ht-invoice-edit-body {
-    margin: 5px 0;
-    height: 60px;
+    min-height: 50px;
     border-right: 1px dashed $border-color-light;
 
     .ht-invoice-draggable-group {
         display: flex;
+        border: solid #000;
+        border-width: 1px 0;
 
         .no-data {
             height: 57px;
@@ -168,8 +188,7 @@
         }
 
         .list-group-item {
-            border: solid #000;
-            border-width: 1px 0 1px 0;
+            border: 0 solid #000;
             flex: none;
         }
 
@@ -193,13 +212,17 @@
     background-color: #000;
     width: 100%;
     padding: 20px;
-    
+
     .ht-invoice-edit-box {
         padding: 10px;
         height: 100%;
         overflow: auto;
         color: #000;
         background-color: #fff;
+
+        &::-webkit-scrollbar {
+            width: 0 !important
+        }
     }
 
     .ht-invoice-edit-content-box {

@@ -30,11 +30,12 @@
         display: flex;
         flex-wrap: wrap;
     }
+    .list-group-item {
+        margin-bottom: 5px;
+    }
 }
 
 .ht-invoice-tem-body {
-    margin: 10px 0;
-
     .el-table .cell,
     .el-table th div,
     .el-table--border td:first-child .cell,

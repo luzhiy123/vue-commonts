@@ -10,13 +10,18 @@ export default {
             required: true
         }
     },
+    methods: {
+        changeHandle() {
+            this.$emit("change", this.list)
+        }
+    },
     render() {
         return (
             <div class="ht-alternative-files">
                 <Draggable
                     class="ht-invoice-draggable-group"
                     attrs={this.$attrs}
-                    on={this.listeners}
+                    on-change={() => this.changeHandle()}
                     list={this.list}
                 >
                     {

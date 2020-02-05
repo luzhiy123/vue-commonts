@@ -1,6 +1,6 @@
 
 <script>
-import { mapActions, mapMutations, mapState } from "vuex";
+import { mapActions, mapMutations, mapState, mapGetters } from "vuex";
 import Draggable from "vuedraggable";
 
 import { makeEditInvoiceStore } from "./store";
@@ -23,12 +23,8 @@ export default {
         }
     },
     computed: {
-        ...mapState([
-            "invoice",
-            "templateHeader",
-            "templateBody",
-            "templateFooter"
-        ])
+        ...mapState(["invoice"]),
+        ...mapGetters(["templateHeader", "templateBody", "templateFooter"])
     },
     watch: {
         baseFiles: {
@@ -36,27 +32,25 @@ export default {
             handler() {
                 this.$nextTick(() => {
                     this.initData();
-                })
+                });
             }
         },
         temData() {
-            this.setTemplateData(this.temData);
-        },
+            this.setTemDataSource(this.temData);
+        }
     },
     beforeCreate() {
         // 该方式回重置store，导致外部引入store无法使用，只在纯粹无外部store依赖的组件中使用
         this.$store = makeEditInvoiceStore();
     },
     methods: {
-        ...mapActions([
-            "initStoreData"
-        ]),
-        ...mapMutations(["setTemplateData"]),
+        ...mapActions(["initStoreData"]),
+        ...mapMutations(["setTemDataSource"]),
         initData() {
             this.initStoreData({
                 typeEmun: this.typeEmun,
                 baseFiles: this.baseFiles,
-                temData: this.temData,
+                temData: this.temData
             });
         },
         saveAll() {
@@ -66,10 +60,15 @@ export default {
                     templateHeader: this.templateHeader.map(item => ({
                         name: item.name
                     })),
-                    templateBody: this.templateBody.map(item => ({
-                        name: item.name,
-                        width: item.width
-                    })),
+                    templateBody: this.templateBody.map(item => {
+                        return {
+                            ...item,
+                            content: item.content.map(it => ({
+                                name: it.name,
+                                width: it.width
+                            }))
+                        };
+                    }),
                     templateFooter: this.templateFooter.map(item => ({
                         name: item.name
                     }))

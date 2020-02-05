@@ -1,5 +1,5 @@
 <script>
-import { mapState } from "vuex";
+import { mapGetters } from "vuex";
 import AlternativeFiles from "./alternative-files";
 
 export default {
@@ -9,8 +9,21 @@ export default {
             required: true
         }
     },
+    data() {
+        return {
+            useTemplateData: []
+        }
+    },
     computed: {
-        ...mapState(["headerData"])
+        ...mapGetters(["headerData"])
+    },
+    watch: {
+        templateData: {
+            immediate: true,
+            handler(value) {
+                this.useTemplateData = value
+            }
+        }
     },
     methods: {
         handleTemplateChange(data) {
@@ -24,7 +37,7 @@ export default {
                     on={this.$listeners}
                     attrs={this.$attrs}
                     group="header"
-                    list={this.templateData}
+                    list={this.useTemplateData}
                     scopedSlots={{
                         default: list =>
                             list.length ? (

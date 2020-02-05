@@ -1,7 +1,7 @@
 
 <script>
 import { dateFormatFull } from "hztl-ui/src/utils/date-util";
-import { mapState } from "vuex";
+import { mapState, mapGetters } from "vuex";
 
 export default {
     props: {
@@ -13,7 +13,8 @@ export default {
         };
     },
     computed: {
-        ...mapState(["invoice", "typeEmun", "headerData"])
+        ...mapState(["invoice", "typeEmun"]),
+        ...mapGetters(["headerData"])
     },
     render() {
         return (

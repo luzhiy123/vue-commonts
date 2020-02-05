@@ -43,14 +43,18 @@ export default {
                         list={this.altHeaderFiles}
                     />
                 </div>
-                <div class="ht-invoice-alternative-box auto-block flex-container column-flex">
-                    <div class="sub-title">&nbsp;·&nbsp;标题列数据</div>
-                    <AlternativeFiles
-                        class="auto-block"
-                        group="body"
-                        list={this.altBodyFiles}
-                    />
-                </div>
+                {this.altBodyFiles.map(item => (
+                    <div class="ht-invoice-alternative-box auto-block flex-container column-flex">
+                        <div class="sub-title">
+                            &nbsp;·&nbsp;{item.tableName}标题列数据
+                        </div>
+                        <AlternativeFiles
+                            class="auto-block"
+                            group={`body${item.soureFile}`}
+                            list={item.content}
+                        />
+                    </div>
+                ))}
             </div>
         );
     }

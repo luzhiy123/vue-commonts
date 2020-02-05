@@ -1,11 +1,15 @@
 <script>
+import { mapGetters } from "vuex";
 import debounce from "throttle-debounce/debounce";
-import { mapState } from "vuex";
 import HtResizeBox from "hztl-ui/packages/resize-box";
 import AlternativeFiles from "./alternative-files";
 
 export default {
     props: {
+        soureFile: {
+            type: String,
+            required: true
+        },
         templateData: {
             type: Array,
             required: true
@@ -13,16 +17,22 @@ export default {
     },
     data() {
         return {
-            debounceHandleTemplateChange: debounce(
-                100,
-                this.handleTemplateChange
-            )
+            debounceHandleTemplateChange: debounce(100, this.handleTemplateChange),
+            useTemplateData: []
         };
     },
     computed: {
-        ...mapState(["detailsData"]),
+        ...mapGetters(["bodysData"]),
         detail() {
-            return this.detailsData[0] ? this.detailsData[0] : {}
+            return this.bodysData[this.soureFile][0] ?this.bodysData[this.soureFile][0] : {};
+        }
+    },
+    watch: {
+        templateData: {
+            immediate: true,
+            handler(value) {
+                this.useTemplateData = value
+            }
         }
     },
     methods: {
@@ -38,9 +48,9 @@ export default {
         return (
             <div class="ht-invoice-edit-body">
                 <AlternativeFiles
-                    group="body"
+                    group={`body${this.soureFile}`}
                     handle=".dragghandle"
-                    list={this.templateData}
+                    list={this.useTemplateData}
                     on={this.$listeners}
                     attrs={this.$attrs}
                     scopedSlots={{
@@ -72,9 +82,7 @@ export default {
                                     </HtResizeBox>
                                 ))
                             ) : (
-                                <div class="no-data">
-                                    拖拽标题列数据设置表格
-                                </div>
+                                <div class="no-data">拖拽标题列数据设置表格</div>
                             )
                     }}
                 />

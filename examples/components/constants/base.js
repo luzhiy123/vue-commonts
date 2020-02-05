@@ -4,11 +4,16 @@ export const INVOICE_TYPE_EMUN = {
     orderPlan: "订货计划单",
     orderArrival: "采购到货单",
     orderReturn: "采购退货单",
-    dispatchArrival: "急件到货单",
+    // dispatchArrival: "急件到货单",
     sale: "销售",
     customerOrder: "客户订单",
-    saleOut: "销售出库单",
-    saleReturn: "销售退货单"
+    saleOut: "销售开单",
+    saleReturn: "销售退货单",
+    store: "仓储",
+    storeTake: "盘点单",
+    storeMove: "移仓单",
+    finance: "出纳",
+    stetementList: "应收应付对账单"
 }
 
 
@@ -28,12 +33,11 @@ export const INVOICE_TREE = [
             {
                 key: "orderReturn",
             },
-            {
-                key: "dispatchArrival",
-            },
+            // {
+            //     key: "dispatchArrival",
+            // },
         ]
     },
-
     {
         key: "sale",
         disabled: true,
@@ -48,9 +52,29 @@ export const INVOICE_TREE = [
                 key: "saleReturn",
             },
         ]
+    },
+    {
+        key: "store",
+        disabled: true,
+        children: [
+            {
+                key: "storeTake",
+            },
+            {
+                key: "storeMove",
+            },
+        ]
+    },
+    {
+        key: "finance",
+        disabled: true,
+        children: [
+            {
+                key: "stetementList"
+            }
+        ]
     }
 ]
-
 
 export const PRINT_TAPES = {
     purchaseNormal: "采购订单",
@@ -69,33 +93,3 @@ export const PRINT_TAPES = {
     logsProof: "付款凭证",
     statementsDetail: "往来对账账单"
 }
-
-export const SIZE_OPTIONS = [
-    {
-        id: 1,
-        name: "1/1",
-        size: 31
-    },
-    // {
-    //     id: 2,
-    //     name: '1/2',
-    //     size: 12
-    // },
-    // {
-    //     id: 3,
-    //     name: '1/3',
-    //     size: 6
-    // },
-]
-
-// 默认选中值
-export const DEFAULT_SIZE_OPTION = SIZE_OPTIONS[0]
-
-export const statementsColumns = [
-    { name: "序号", width: "60", align: "center", prop: "index" },
-    { name: "对账备注", prop: "remark" },
-    { name: "应收金额", prop: "amount" },
-    { name: "业务类型", prop: "sourceBillType" },
-    { name: "业务单号", prop: "sourceBillNo" },
-    { name: "业务员", prop: "businessManName" },
-]

@@ -4,7 +4,7 @@ import { PRINT_TEMS_CONTENTS } from "./tems-contents";
 import { BASE_HEADERS_LIST } from "./base-headers-list";
 import { BASE_BODYS_LIST } from "./base-bodys-list";
 
-const testKey = "orderPlan"
+const testKey = "stetementList"
 
 
 export const DEFAULT_PRINT_TEMS = PRINT_KEY_LIST.map(key => {

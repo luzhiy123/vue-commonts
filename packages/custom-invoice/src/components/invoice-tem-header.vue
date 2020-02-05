@@ -1,5 +1,5 @@
 <script>
-import { mapState } from "vuex";
+import { mapGetters } from "vuex";
 
 import { dateFormat } from "hztl-ui/src/utils/date-util";
 import priceUppercase from "hztl-ui/src/utils/priceUppercase";
@@ -13,7 +13,7 @@ export default {
         }
     },
     computed: {
-        ...mapState(["headerData"]),
+        ...mapGetters(["headerData"]),
         formatTemplateData() {
             return this.templateData.map(item => {
                 const file = {
