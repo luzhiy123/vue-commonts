@@ -111,7 +111,7 @@ const getters = {
             })
             return headerData;
         }
-        return state.dataSource.header || {};
+        return state.dataSource.header;
     },
     bodysData(state) {
         if (state.showSample) {
@@ -186,7 +186,7 @@ const baseMutations = {
         state.showSample = showSample;
     },
     setDataSource(state, invoiceData) {
-        state.dataSource = invoiceData;
+        state.dataSource = invoiceData || {};
     }
 }
 
