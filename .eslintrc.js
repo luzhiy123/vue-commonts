@@ -18,6 +18,8 @@ module.exports = {
 		"vue/html-indent": ["error", 4],
         "vue/script-indent": ["error", 4, { "switchCase": 1 }],
         "vue/require-default-prop": "off",
+        "vue/require-component-is": "off",
+        "vue/require-prop-types": "off",
         "quotes": [1, "double"],
 		"no-console": "off",
 		"no-debugger": "warn"

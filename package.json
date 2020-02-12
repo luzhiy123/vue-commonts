@@ -11,7 +11,7 @@
     "build:file": "node build/bin/build-entry.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "webpack-dev-server --config ./build/webpack.dev.js --progress",
-    "start": "npm run dev",
+    "start": "npm run build:file && npm run dev",
     "clean": "rimraf lib",
     "build:utils": "cross-env BABEL_ENV=utils babel src --out-dir lib --ignore src/index.js",
     "build:theme": "node build/bin/gen-cssfile && gulp build --gulpfile packages/theme-chalk/gulpfile.js && cp-cli packages/theme-chalk/lib lib/theme-chalk",

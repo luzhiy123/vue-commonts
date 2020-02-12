@@ -1,0 +1,118 @@
+@import "./var";
+
+.ht-tags-view-container {
+    position: relative;
+    background: $color-content-bg;
+    margin: 0 5px 0 0;
+    padding-left: 0;
+    height: 26px;
+    line-height: 26px;
+    font-size: 13px;
+    display: flex;
+
+    &.full-container {
+        .tag {
+            flex: auto;
+        }
+
+        .dropdown-tag {
+            position: static !important;
+        }
+    }
+
+    .tag {
+        position: relative;
+        display: flex;
+        color: $color-text-regular;
+        text-align: center;
+
+        .tag-link {
+            padding-left: 3px;
+            flex: auto;
+        }
+
+        .tag-icon {
+            padding-right: 10px;
+        }
+
+        .tag-link,
+        .tag-icon {
+            cursor: pointer;
+
+            &:hover {
+                color: $color-primary;
+            }
+        }
+
+        &.dropdown-tag {
+            position: absolute;
+            right: 0;
+            flex: 1;
+            min-width: 25px;
+            width: 25px;
+            padding: 0;
+
+            .el-dropdown {
+                width: 100%;
+                cursor: pointer;
+
+                .el-dropdown-link {
+                    display: block;
+                }
+            }
+        }
+
+        &:after {
+            position: absolute;
+            content: '';
+            border-right: 1px solid $border-color-light;
+            right: 0;
+            top: 5px;
+            height: 16px;
+        }
+
+        &.active {
+            color: $color-primary;
+            background: $color-base-background;
+        }
+    }
+
+
+    .dropdown-menu {
+        cursor: auto;
+        display: flex;
+        padding: 0;
+
+        &:focus,
+        &:not(.is-disabled):hover {
+            background-color: #fff;
+            color: #606266;
+        }
+
+        .tag-link {
+            flex: auto;
+            padding: 0 20px 0 15px;
+        }
+
+        .tag-icon {
+            padding-left: 0;
+            padding-right: 2px;
+        }
+
+        .tag-link,
+        .el-icon-close {
+            cursor: pointer;
+
+            &:hover {
+                color: $color-primary;
+            }
+        }
+    }
+
+    .ht-menu-wrapper {
+        .el-submenu__icon-arrow.el-icon-arrow-right {
+            display: none;
+        }
+    }
+
+}

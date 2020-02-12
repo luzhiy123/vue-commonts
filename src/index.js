@@ -7,6 +7,7 @@ import Autocomplete from "../packages/autocomplete/index.js";
 import CustomInvoice from "../packages/custom-invoice/index.js";
 import TemInvoice from "../packages/tem-invoice/index.js";
 import ResizeBox from "../packages/resize-box/index.js";
+import MenuAside from "../packages/menu-aside/index.js";
 
 import "element-ui/lib/theme-chalk/index.css";
 
@@ -16,6 +17,7 @@ const components = [
     CustomInvoice,
     TemInvoice,
     ResizeBox,
+    MenuAside,
 ];
 
 const hztlInstall = function(Vue) {
@@ -37,5 +39,6 @@ export default {
     Autocomplete,
     CustomInvoice,
     TemInvoice,
-    ResizeBox
+    ResizeBox,
+    MenuAside
 };
