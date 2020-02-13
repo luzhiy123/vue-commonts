@@ -1,6 +1,7 @@
 @import "./var";
 
-.ht-tags-view-container {
+
+.ht-tags-container {
     position: relative;
     background: $color-content-bg;
     margin: 0 5px 0 0;
@@ -35,8 +36,7 @@
             padding-right: 10px;
         }
 
-        .tag-link,
-        .tag-icon {
+        .tag-link, .tag-icon {
             cursor: pointer;
 
             &:hover {
@@ -52,7 +52,7 @@
             width: 25px;
             padding: 0;
 
-            .el-dropdown {
+            /deep/ .el-dropdown {
                 width: 100%;
                 cursor: pointer;
 
@@ -76,43 +76,34 @@
             background: $color-base-background;
         }
     }
+}
 
 
-    .dropdown-menu {
-        cursor: auto;
-        display: flex;
-        padding: 0;
+.ht-tag-dropdown-menu {
+    cursor: auto;
+    display: flex;
+    padding: 0;
 
-        &:focus,
-        &:not(.is-disabled):hover {
-            background-color: #fff;
-            color: #606266;
-        }
-
-        .tag-link {
-            flex: auto;
-            padding: 0 20px 0 15px;
-        }
-
-        .tag-icon {
-            padding-left: 0;
-            padding-right: 2px;
-        }
-
-        .tag-link,
-        .el-icon-close {
-            cursor: pointer;
-
-            &:hover {
-                color: $color-primary;
-            }
-        }
+    &:focus, &:not(.is-disabled):hover {
+        background-color: #fff;
+        color: #606266;
     }
 
-    .ht-menu-wrapper {
-        .el-submenu__icon-arrow.el-icon-arrow-right {
-            display: none;
-        }
+    .tag-link {
+        flex: auto;
+        padding: 0 20px 0 15px;
     }
 
+   .tag-icon {
+        padding-left: 0;
+        padding-right: 2px;
+    }
+
+    .tag-link, .el-icon-close {
+        cursor: pointer;
+
+        &:hover {
+            color: $color-primary;
+        }
+    }
 }

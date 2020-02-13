@@ -8,6 +8,7 @@ import CustomInvoice from "../packages/custom-invoice/index.js";
 import TemInvoice from "../packages/tem-invoice/index.js";
 import ResizeBox from "../packages/resize-box/index.js";
 import MenuAside from "../packages/menu-aside/index.js";
+import TagsView from "../packages/tags-view/index.js";
 
 import "element-ui/lib/theme-chalk/index.css";
 
@@ -18,6 +19,7 @@ const components = [
     TemInvoice,
     ResizeBox,
     MenuAside,
+    TagsView,
 ];
 
 const hztlInstall = function(Vue) {
@@ -40,5 +42,6 @@ export default {
     CustomInvoice,
     TemInvoice,
     ResizeBox,
-    MenuAside
+    MenuAside,
+    TagsView
 };

@@ -4,6 +4,7 @@
     "custom-invoice":  "./packages/custom-invoice/index.js",
     "tem-invoice": "./packages/tem-invoice/index.js",
     "resize-box": "./packages/resize-box/index.js",
-    "menu-aside":  "./packages/menu-aside/index.js"
+    "menu-aside":  "./packages/menu-aside/index.js",
+    "tags-view":  "./packages/tags-view/index.js"
 }
   
