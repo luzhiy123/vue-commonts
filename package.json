@@ -37,8 +37,10 @@
   "files": [
     "lib",
     "src",
-    "packages"
+    "packages",
+    "types"
   ],
+  "typings": "types/index.d.ts",
   "devDependencies": {
     "@babel/cli": "^7.8.3",
     "@babel/core": "^7.7.5",
